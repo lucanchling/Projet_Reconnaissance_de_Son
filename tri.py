@@ -23,10 +23,10 @@ def fNormalize(data):
 
 try:
     # Fichier 1
-    Ts1, data1 = wavfile.read("aaa.wav")
+    Ts1, data1 = wavfile.read("./music/music1.wav")
     temps1 = np.linspace(0,len(data1)*1/Ts1,len(data1))
     # Fichier 2
-    Ts2, data2 = wavfile.read("test.wav")
+    Ts2, data2 = wavfile.read("./music/music1.wav")
     temps2 = np.linspace(0,len(data2)*1/Ts2,len(data2))
     
 
