@@ -1,4 +1,5 @@
 import numpy as np
+from cmath import *
 
 
 def compute_similarity(ref_rec,input_rec,weightage=[0.33,0.33,0.33]):
@@ -31,3 +32,17 @@ def diff_zero(signal):
             ind2 = i
             break
     return signal[ind1:ind2+1]
+
+def fft(x):
+    N=len(x)
+    if N==1:
+        return x
+    
+    even = fft([x[k] for k in range(0,N,2)])
+    odd = fft([x[k] for k in range(1,N,2)])
+    
+    M=N/2
+    l=[even[k]+exp(-2j*pi*k/N)*odd[k] for k in range(M)]
+    r=[even[k]-exp(-2j*pi*k/N)*odd[k] for k in range(M)]
+    
+    return l+r
