@@ -20,6 +20,7 @@ if __name__ == '__main__':
   for filename in os.listdir(path):
     if filename.endswith(".mp3"):
       reader = FileReader(path + filename)
+
       audio = reader.parse_audio()
 
       song = db.get_song_by_filehash(audio['file_hash'])
@@ -50,7 +51,7 @@ if __name__ == '__main__':
         msg = '   fingerprinting channel %d/%d'
         print colored(msg, attrs=['dark']) % (channeln+1, channel_amount)
 
-        channel_hashes = fingerprint.fingerprint(channel, Fs=audio['Fs'], plots=config['fingerprint.show_plots'])
+        channel_hashes = fingerprint.fingerprint(channel, Fs=audio['Fs'], plots=True) #config['fingerprint.show_plots'])
         channel_hashes = set(channel_hashes)
 
         msg = '   finished channel %d/%d, got %d hashes'

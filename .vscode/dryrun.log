@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/fs03/share/users/emma.ortiz/home/Documents/projet_majeure/Projet_Majeure'
+make: Leaving directory '/fs03/share/users/emma.ortiz/home/Documents/projet_majeure/Projet_Majeure'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
