@@ -12,8 +12,9 @@ y1 = y1(:);
 y2 = y2(:);
 y3 = y3(:);
 
-[c,lags] = xcorr(y1,y2,10,'normalized');
-stem(lags,c)
+% Spectrogramme
+s = spectrogram(y1);
+spectrogram(y1,'yaxis')
 
 %%
 sound(y,Fs); 
