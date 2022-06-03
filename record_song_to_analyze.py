@@ -17,7 +17,7 @@ def record_micro(seconds):
     sd.wait(seconds) 
     print("end")
 
-    write("record.wav",freq,recording)
+    write("./music/music_to_compare.wav",freq,recording)
   
     
 #record_micro(10)
@@ -32,6 +32,6 @@ def random_mono_extract_from_file(duree : int, choix_music : str):
     fin = debut + duree 
     
     slice = sound[debut:fin]
-    slice.export('./music/music_to_compare.wav', format='wav')
+    slice.export('./music/music_to_compare_mono.wav', format='wav')
     
    
