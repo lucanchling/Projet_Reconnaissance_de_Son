@@ -5,6 +5,7 @@ import time, keyboard
 from pydub import AudioSegment
 import pyaudio 
 import wave 
+from random import randint
 
 def record_micro(seconds):
     freq = 44100
@@ -17,16 +18,20 @@ def record_micro(seconds):
     print("end")
 
     write("record.wav",freq,recording)
-
-
-    #wv.write("recording1.wav", recording, freq, sampwidth=2)
-    
+  
     
 #record_micro(10)
 
-def record_from_laptop_sound(choix :int ):
+def random_mono_extract_from_file(duree : int, choix_music : str):
     
-    audio = AudioSegment.from_wav('./music/music'+str(choix)+'.wav')
-    #return audio
+    sound = AudioSegment.from_wav('./music/music'+choix_music+'.wav')
+    sound = sound.set_channels(1)
 
-record_from_laptop_sound(3)
+    duree = 10000  # une seconde est égale à 1000
+    debut = randint(0,len(sound)-duree)
+    fin = debut + duree 
+    
+    slice = sound[debut:fin]
+    slice.export('./music/music_to_compare.wav', format='wav')
+    
+   
