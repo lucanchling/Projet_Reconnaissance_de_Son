@@ -82,7 +82,7 @@ if __name__ == '__main__':
   msg = ' * recorded %d samples'
   print colored(msg, attrs=['dark']) % len(data[0])
 
-  # reader.save_recorded('test.wav')
+  #reader.save_recorded('test.wav')
 
 
   Fs = fingerprint.DEFAULT_FS
