@@ -1,11 +1,9 @@
 import scipy.io.wavfile as wavfile
-import scipy.fftpack as fftpack
 import numpy as np
 import matplotlib.pyplot as plt
 from pydub import AudioSegment
 import matplotlib.mlab as mlab
 import os
-import sys
 
 
 def create_mono(file):
@@ -14,6 +12,10 @@ def create_mono(file):
     :param file: path to the file
     :return: None
     """
+
+    ################
+    # For DB MUSIC #
+    ################
     # Check if the file isn't a mono
     number = file[-5] # Check the number of the music
     if number.isdigit():    # It ain't a mono
@@ -23,6 +25,7 @@ def create_mono(file):
             sound = AudioSegment.from_file(file, format="wav")
             sound = sound.set_channels(1)
             sound.export(file[:-4] + "_mono.wav", format="wav")
+
 
 
 # Function to locate peaks in the spectrogram of the music
@@ -159,19 +162,28 @@ def write_hash_txt(hashes: List[Tuple[str, int]], file_name: str) -> None:
         for h, t in hashes:
             f.write("{} {}\n".format(h, t))
 
-def read_hash_txt(file_name: str) -> List[Tuple[str, int]]:
+
+def generate_fingerprints(file_name: str) -> List[Tuple[str, int]]:
     """
-    Read the hashes from a text file.
-    :param file_name: the name of the file to read from.
-    :return: the list of hashes.
+    Generate the fingerprints of the audio file in mono.
+    :param file_name: the name of the audio file.
+    :param fs: the sampling frequency of the audio file.
+    :param fan_value: the degree to which a fingerprint can be paired with its neighbors.
+    :return: the list of fingerprints.
     """
-    hashes = []
-    with open(file_name, 'r') as f:
-        for line in f:
-            h, t = line.strip().split(" ")
-            hashes.append((h, int(t)))
+    print("début du traitement...")
+    print("lecture du fichier...")
+    fs, data = wavfile.read(file_name)    # reading the mono version of the music
+    print("calcul du spectrogram...")
+    spectrogram_music = spectrogram(data, fs)   # generating the spectrogram of the music
+    print("calcul des peaks...")
+    peaks = get_2D_peaks(spectrogram_music)  # find the peaks of the music
+    print("calcul des hashes...")
+    hashes = generate_hashes(peaks)  # generate the hashes of the music
+    
 
     return hashes
+
 
 ########
 # Main #
@@ -191,17 +203,10 @@ if __name__ == "__main__":
         if file.endswith("_mono.wav"):
             nb = nb + 1
             print(file)
-            print("début du traitement...")
-            print("lecture du fichier...")
-            fs, data = wavfile.read(PATH + file)    # reading the mono version of the music
-            print("calcul du spectrogram...")
-            spectrogram_music = spectrogram(data, fs)   # generating the spectrogram of the music
-            print("calcul des peaks...")
-            peaks = get_2D_peaks(spectrogram_music)  # find the peaks of the music
-            print("calcul des hashes...")
-            hashes = generate_hashes(peaks)  # generate the hashes of the music
-            print("écriture des hashes dans le txt...")
+            # We generate the fingerprints of the music (hashes)
+            hashes = generate_fingerprints(PATH+file)
             print(len(hashes))
+            print("écriture des hashes dans le txt...")
             write_hash_txt(hashes, "./dbmusic/datamusic"+ str(nb)+ ".txt")  # write the hashes of the music in a text file
             
             
