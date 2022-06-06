@@ -20,7 +20,7 @@ def record_micro(seconds):
     write("./music/music_to_compare.wav",freq,recording)
   
     
-#record_micro(10)
+record_micro(15)
 
 def random_mono_extract_from_file(duree : int, choix_music : str):
     
