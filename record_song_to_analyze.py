@@ -5,14 +5,14 @@ from pydub import AudioSegment
 import os
 from random import randint
 
-def record_micro(seconds):
+def record_micro(duree : int):
     freq = 48000
-    duration = seconds
+    duration = duree
     print("Press Space To start")
     if keyboard.read_key() == 'space' :
         print("Go")
         recording = sd.rec(int(duration * freq), samplerate = freq, channels = 1 )
-    sd.wait(seconds) 
+    sd.wait(duree) 
     print("end")
 
     write("./music/music_to_compare.wav",freq,recording)
