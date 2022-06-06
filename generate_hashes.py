@@ -223,7 +223,7 @@ def transfer_wav_to_music():
 ########
 # Main #
 ########
-if __name__ == "__main__":
+def main():
     # Variables
     PATH = './music/'
 
@@ -243,3 +243,7 @@ if __name__ == "__main__":
                 print("écriture des hashes dans le txt...")
                 write_hash_txt(hashes, "./dbmusic/datamusic"+ str(nb) + ".txt")  # write the hashes of the music in a text file
                 nb = nb + 1
+
+
+# if __name__ == "__main__":
+#     main()

@@ -109,9 +109,7 @@ def find_music(Matches,threshold = 500) -> List[str]:
     else :
         print("Aucune musique correspondante dans la database")
 
-#def recognize_music():
-
-if __name__ == "__main__":
+def main():
     # Variables
     PATH = './music/'
         
@@ -146,3 +144,6 @@ if __name__ == "__main__":
     Matches = array_matches[:]
     print(Matches)
     find_music(Matches,500)
+
+# if __name__ == "__main__":
+#     main()
