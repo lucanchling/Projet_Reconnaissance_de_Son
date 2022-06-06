@@ -1,16 +1,17 @@
+from imghdr import tests
+import time
 import compare_with_db as cwdb
 import generate_hashes as gh
 from record_song_to_analyze import record_micro, random_mono_extract_from_file
 from random import randint
 
-if __name__ == "__main__":
-    
+def main():
     # Part ONE : Analyse Music from DB
     print("-- ANALYSE MUSIC FROM DB --")
     if str(input("Do you want to analyse the music from the DB ? (y/n) : ")) == "y":
         gh.main()
 
-    print()
+    # print()
 
     # Part TWO : Analyse Music from User
     print("-- MUSIC FROM USER --")
@@ -19,6 +20,7 @@ if __name__ == "__main__":
     print("2. Record a music from your microphone")
     print("3. Import your own recording")
     answer = int(input("Your choice : "))
+
 
     if answer == 1:
         duree = int(input("How long do you want to record (in seconds) ? "))
@@ -39,4 +41,17 @@ if __name__ == "__main__":
     print("Do you want to compare the music with the DB ? (y/n)")
     if str(input()) == "y":
         cwdb.main()
-    
+
+def test():
+    '''function to run some test to setup the threshold'''
+    #main()
+    duree = 10
+    for i in range(10):
+        print("test n°"+str(i+1))
+        random_mono_extract_from_file(duree,randint(1,10))
+        time.sleep(1)
+        cwdb.main()
+
+if __name__ == "__main__":
+    #main()
+    test()

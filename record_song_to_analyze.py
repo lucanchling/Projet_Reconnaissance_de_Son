@@ -41,6 +41,6 @@ def random_mono_extract_from_file(duree : int, choix_music : str):
                 break
             nb = nb + 1
 
-random_mono_extract_from_file(15,4)
+#random_mono_extract_from_file(15,4)
     
    
