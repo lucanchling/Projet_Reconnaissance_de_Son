@@ -163,7 +163,7 @@ def write_hash_txt(hashes: List[Tuple[str, int]], file_name: str) -> None:
             f.write(h+"\n")
 
 
-def generate_fingerprints(file_name: str) -> List[Tuple[str, int]]:
+def generate_fingerprints(file_name : str, plots = True ) -> List[Tuple[str, int]]:
     """
     Generate the fingerprints of the audio file in mono.
     :param file_name: the name of the audio file.
@@ -171,14 +171,18 @@ def generate_fingerprints(file_name: str) -> List[Tuple[str, int]]:
     :param fan_value: the degree to which a fingerprint can be paired with its neighbors.
     :return: the list of fingerprints.
     """
-    print("début du traitement...")
-    print("lecture du fichier...")
+    if plots:
+        print("début du traitement...")
+        print("lecture du fichier...")
     fs, data = wavfile.read(file_name)    # reading the mono version of the music
-    print("calcul du spectrogram...")
+    if plots:
+        print("calcul du spectrogram...")
     spectrogram_music = spectrogram(data, fs)   # generating the spectrogram of the music
-    print("calcul des peaks...")
+    if plots:
+        print("calcul des peaks...")
     peaks = get_2D_peaks(spectrogram_music)  # find the peaks of the music
-    print("calcul des hashes...")
+    if plots:
+        print("calcul des hashes...")
     hashes = generate_hashes(peaks)  # generate the hashes of the music
     
 
