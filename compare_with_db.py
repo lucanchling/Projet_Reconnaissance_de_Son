@@ -58,36 +58,34 @@ if __name__ == "__main__":
         # We read the hashes of the music
         hashes = read_hash_txt("./dbmusic/datamusic"+ str(i)+ ".txt")
         Hashes.append(hashes)
-    np_Hashes = np.array(Hashes,dtype=object)
+    
 
     # PART TWO --> COMPARISON OF THE HASHES
     # Generation of hash of the music we want to compare
     create_mono(PATH + "music_to_compare.wav")
     hashes_to_compare = generate_fingerprints("./music/music_to_compare_mono.wav")
-    print(type(hashes_to_compare[0][1]))
-    #np_hashes_to_compare = np.array(hashes_to_compare,dtype=object)
-    # nb_of_hashes_to_compare = len(hashes_to_compare)
-    # print(nb_of_hashes_to_compare)
+    nb_of_hashes_to_compare = len(hashes_to_compare)
+    print(nb_of_hashes_to_compare)
     # for i in range(0, nb_music_in_db):
     #     print("Comparaison avec la musique " + str(i+1))
 
 
 
-    # for i in range(0, nb_music_in_db):
-    #     print("Comparaison avec la musique " + str(i+1))
-    #     tic = time()
-    #     # We compare the hashes of the music we want to compare with the hashes of the music in the database
-    #     nb_of_hashes_in_db = len(Hashes[i])
-    #     nb_of_hashes_found = 0
-    #     for j in range(0, nb_of_hashes_in_db):
-    #         for k in range(0, nb_of_hashes_to_compare):
-    #             if Hashes[i][j][0] == hashes_to_compare[k][0]:
-    #                 nb_of_hashes_found = nb_of_hashes_found + 1
-    #                 break
+    for i in range(0, nb_music_in_db):
+        print("Comparaison avec la musique " + str(i+1))
+        tic = time()
+        # We compare the hashes of the music we want to compare with the hashes of the music in the database
+        nb_of_hashes_in_db = len(Hashes[i])
+        nb_of_hashes_found = 0
+        for j in range(0, nb_of_hashes_in_db):
+            for k in range(0, nb_of_hashes_to_compare):
+                if Hashes[i][j][0] == hashes_to_compare[k][0]:
+                    nb_of_hashes_found = nb_of_hashes_found + 1
+                    break
         
-    #     # We print the result
-    #     print("Nombre de matchs : ", nb_of_hashes_found)
-    #     print("Temps de calcul : ", round(time() - tic, 3), "s")
+        # We print the result
+        print("Nombre de matchs : ", nb_of_hashes_found)
+        print("Temps de calcul : ", round(time() - tic, 3), "s")
 
     '''
     nb_matches = 0

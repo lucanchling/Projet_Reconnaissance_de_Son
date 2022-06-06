@@ -198,16 +198,16 @@ if __name__ == "__main__":
             #print(file)
             create_mono(PATH + file)
     # We go through each music and we analyse each of them (only the mono version)
-    nb = 0
+    nb = 1
     for file in os.listdir(PATH):
-        if file.endswith("_mono.wav"):
-            nb = nb + 1
+        if file.endswith(str(nb)+"_mono.wav"):
             print(file)
             # We generate the fingerprints of the music (hashes)
             hashes = generate_fingerprints(PATH+file)
             print(len(hashes))
             print("écriture des hashes dans le txt...")
             write_hash_txt(hashes, "./dbmusic/datamusic"+ str(nb)+ ".txt")  # write the hashes of the music in a text file
+            nb = nb + 1
             
             
 
