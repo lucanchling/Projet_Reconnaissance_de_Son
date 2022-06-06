@@ -18,18 +18,16 @@ def nb_of_music_in_db() -> int:
 
     return nb
 
-def read_hash_txt(file_name: str) -> List[Tuple[str, int]]:
+def read_hash_txt(file_name: str) -> List[str]:
     """
-    Read the hashes from a text file.
-    :param file_name: the name of the file to read from.
+    Read the hashes of the music from a text file with erasing the \n at the end of each line.
+    :param file_name: the name of the text file.
     :return: the list of hashes.
     """
-    hashes = []
     with open(file_name, 'r') as f:
+        hashes = []
         for line in f:
-            h, t = line.strip().split(" ")
-            hashes.append((h, int(t)))
-
+            hashes.append(line[:-1])
     return hashes
 
 def create_mono(file: str) -> None:
@@ -66,33 +64,16 @@ if __name__ == "__main__":
     hashes_to_compare = generate_fingerprints("./music/music_to_compare_mono.wav")
     nb_of_hashes_to_compare = len(hashes_to_compare)
     print(nb_of_hashes_to_compare)
-    # for i in range(0, nb_music_in_db):
-    #     print("Comparaison avec la musique " + str(i+1))
 
-
-
+    tic = time()
     for i in range(0, nb_music_in_db):
         print("Comparaison avec la musique " + str(i+1))
-        tic = time()
         # We compare the hashes of the music we want to compare with the hashes of the music in the database
-        nb_of_hashes_in_db = len(Hashes[i])
         nb_of_hashes_found = 0
-        for j in range(0, nb_of_hashes_in_db):
-            for k in range(0, nb_of_hashes_to_compare):
-                if Hashes[i][j][0] == hashes_to_compare[k][0]:
-                    nb_of_hashes_found = nb_of_hashes_found + 1
-                    break
-        
+        for hash in Hashes[i]:
+            if hash in hashes_to_compare:
+                nb_of_hashes_found = nb_of_hashes_found + 1
+
         # We print the result
         print("Nombre de matchs : ", nb_of_hashes_found)
-        print("Temps de calcul : ", round(time() - tic, 3), "s")
-
-    '''
-    nb_matches = 0
-    for h1, t1 in hashes_from_txt:
-        for h2, t2 in hashes:
-            if h1 == h2:
-                nb_matches = nb_matches + 1
-                break
-    print("Nombre de matches: {}".format(nb_matches))
-    '''
+    print("Temps de calcul : ", round(time() - tic, 3), "s")

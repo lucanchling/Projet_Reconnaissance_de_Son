@@ -147,7 +147,7 @@ def generate_hashes(peaks: List[Tuple[int, int]], fan_value: int = FINGERPRINT_P
                 if min_hash <= t_delta <= max_hash:
                     h = hashlib.sha1(f"{str(freq1)}|{str(freq2)}|{str(t_delta)}".encode('utf-8'))
 
-                    hashes.append((h.hexdigest()[0:FINGERPRINT_REDUCTION], t1))
+                    hashes.append(h.hexdigest()[0:FINGERPRINT_REDUCTION])#, t1))
 
     return hashes
 
@@ -159,8 +159,8 @@ def write_hash_txt(hashes: List[Tuple[str, int]], file_name: str) -> None:
     :return: None
     """
     with open(file_name, 'w') as f:
-        for h, t in hashes:
-            f.write("{} {}\n".format(h, t))
+        for h in hashes: #, t in hashes:
+            f.write(h+"\n")
 
 
 def generate_fingerprints(file_name: str) -> List[Tuple[str, int]]:
