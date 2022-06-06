@@ -236,10 +236,10 @@ if __name__ == "__main__":
         if file.endswith("_mono.wav"):
             # If the dile isn't the file music_to_compare
             if file != "music_to_compare_mono.wav":
-                print(file)
+                print("Traitement de : ",file)
                 # We generate the fingerprints of the music (hashes)
-                hashes = generate_fingerprints(PATH+file)
-                print(len(hashes))
+                hashes = generate_fingerprints(PATH+file, plots = False)
+                #print(len(hashes))
                 print("écriture des hashes dans le txt...")
                 write_hash_txt(hashes, "./dbmusic/datamusic"+ str(nb) + ".txt")  # write the hashes of the music in a text file
                 nb = nb + 1

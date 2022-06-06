@@ -46,19 +46,21 @@ def retrieve_hashes_from_db(nb_of_music : int) -> List[str]:
 
     return Hashes
 
-def create_mono(file: str) -> None:
+def create_mono(full_path_of_file: str) -> None:
     """
     Create the mono version of the music.
-    :param file_name: the name of the music to convert.
+    :param full_path_of_file: the name of the music to convert.
     :return: None
     """
     ########################
     # For Music To Compare #
     ########################
-
-    sound = AudioSegment.from_file(file, format="wav")
-    sound = sound.set_channels(1)
-    sound.export(file[:-4] + "_mono.wav", format="wav")
+    if not os.path.exists(full_path_of_file) and os.path.exists(full_path_of_file[:-4] + "_mono.wav"):
+        return
+    else:
+        sound = AudioSegment.from_file(full_path_of_file, format="wav")
+        sound = sound.set_channels(1)
+        sound.export(full_path_of_file[:-4] + "_mono.wav", format="wav")
 
 
 def compare_hashes(Hashes: List[str],hashes_to_compare : List[str],indice : int, array) -> int:
@@ -142,5 +144,5 @@ if __name__ == "__main__":
     # PART THREE --> DISPLAY OF THE RESULTS
     #print(array_matches[:])
     Matches = array_matches[:]
-    #print(Matches)
-    #find_music(Matches,500)
+    print(Matches)
+    find_music(Matches,500)
