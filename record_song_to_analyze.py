@@ -8,19 +8,19 @@ import wave
 from random import randint
 
 def record_micro(seconds):
-    freq = 44100
+    freq = 48000
     duration = seconds
     print("Press Space To start")
     if keyboard.read_key() == 'space' :
         print("Go")
-        recording = sd.rec(int(duration * freq), samplerate = freq, channels = 1)
+        recording = sd.rec(int(duration * freq), samplerate = freq, channels = 1 )
     sd.wait(seconds) 
     print("end")
 
     write("./music/music_to_compare.wav",freq,recording)
   
     
-record_micro(15)
+record_micro(15 )
 
 def random_mono_extract_from_file(duree : int, choix_music : str):
     

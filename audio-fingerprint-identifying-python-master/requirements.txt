@@ -1,5 +1,0 @@
-numpy>=1
-termcolor
-pyaudio
-wave
-pydub

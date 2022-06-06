@@ -6,25 +6,7 @@ import matplotlib.mlab as mlab
 import os
 
 
-def create_mono(file):
-    """
-    Create a mono file from the given file if it ain't already the case.
-    :param file: path to the file
-    :return: None
-    """
 
-    ################
-    # For DB MUSIC #
-    ################
-    # Check if the file isn't a mono
-    number = file[-5] # Check the number of the music
-    if number.isdigit():    # It ain't a mono
-        number = int(number)
-        # If there's no mono file, create it
-        if not os.path.isfile(file[:-4] + "_mono.wav"):
-            sound = AudioSegment.from_file(file, format="wav")
-            sound = sound.set_channels(1)
-            sound.export(file[:-4] + "_mono.wav", format="wav")
 
 
 
@@ -188,6 +170,55 @@ def generate_fingerprints(file_name : str, plots = True ) -> List[Tuple[str, int
 
     return hashes
 
+def save_title_txt(title : str, file_name) -> None:
+    """
+    Write the title of the music to a text file.
+    :param title: the title of the music.
+    :param file_name: the name of the file to write to.
+    :return: None
+    """
+    with open(file_name, 'a') as f:
+        f.write(title+"\n")
+
+def create_mono(file,num_of_music):
+    """
+    Create a mono file from the given file if it ain't already the case.
+    :param file: path to the file
+    :return: None
+    """
+    OLD_PATH = "./wav/"
+    NEW_PATH = "./music/"
+    ################
+    # For DB MUSIC #
+    ################
+    
+    if not os.path.exists(NEW_PATH + file[:-4] + "_mono.wav"):
+        sound = AudioSegment.from_file(OLD_PATH + file, format="wav")
+        sound = sound.set_channels(1)
+        sound.export(NEW_PATH + file[:-4] + "_mono.wav", format="wav")
+
+
+def transfer_wav_to_music():
+    """
+    Transfer the wav files to the music folder.
+    :return: None
+    """
+
+    Path = "./wav/"
+    # Check if ./music/musicname.txt exists --> remove it 
+    if os.path.exists("./dbmusic/musicname.txt"):
+        os.remove("./dbmusic/musicname.txt")
+    nb = 1
+    for file in os.listdir(Path):
+        if file.endswith(".wav"):
+            title = file.split(".")[0]
+            save_title_txt(title, "./dbmusic/musicname.txt")
+
+            create_mono(file,nb)
+            nb+=1
+
+            
+
 
 ########
 # Main #
@@ -196,22 +227,19 @@ if __name__ == "__main__":
     # Variables
     PATH = './music/'
 
-    # To check if the mono version of each music is already created (if not --> it generates it)
-    for file in os.listdir(PATH):
-        if file.endswith(".wav"):
-            #print(file)
-            create_mono(PATH + file)
-    # We go through each music and we analyse each of them (only the mono version)
+    # Transfer the wav files to the music folder and saving their names into a text file
+    transfer_wav_to_music() # ./wav/ --> ./music/
+
+    # Generate the fingerprints of the music 
     nb = 1
     for file in os.listdir(PATH):
-        if file.endswith(str(nb)+"_mono.wav"):
-            print(file)
-            # We generate the fingerprints of the music (hashes)
-            hashes = generate_fingerprints(PATH+file)
-            print(len(hashes))
-            print("écriture des hashes dans le txt...")
-            write_hash_txt(hashes, "./dbmusic/datamusic"+ str(nb)+ ".txt")  # write the hashes of the music in a text file
-            nb = nb + 1
-            
-            
-
+        if file.endswith("_mono.wav"):
+            # If the dile isn't the file music_to_compare
+            if file != "music_to_compare_mono.wav":
+                print(file)
+                # We generate the fingerprints of the music (hashes)
+                hashes = generate_fingerprints(PATH+file)
+                print(len(hashes))
+                print("écriture des hashes dans le txt...")
+                write_hash_txt(hashes, "./dbmusic/datamusic"+ str(nb) + ".txt")  # write the hashes of the music in a text file
+                nb = nb + 1

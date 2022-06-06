@@ -1,9 +1,11 @@
+from matplotlib.pyplot import plot
+from numpy import array
 from generate_hashes import generate_fingerprints
 from pydub import AudioSegment
 import os
 from typing import List
 from time import time
-from multiprocessing import Process
+import multiprocessing as mp
 
 def nb_of_music_in_db() -> int:
     """
@@ -11,8 +13,8 @@ def nb_of_music_in_db() -> int:
     :return: the number of music in the database.
     """
     nb = 0
-    for file in os.listdir("./dbmusic/"):
-        if file.endswith(".txt"):
+    for file in os.listdir("./wav/"):
+        if file.endswith(".wav"):
             nb = nb + 1
 
     return nb
@@ -53,13 +55,13 @@ def create_mono(file: str) -> None:
     ########################
     # For Music To Compare #
     ########################
-    if not os.path.isfile(file[:-4] + "_mono.wav"):
-        sound = AudioSegment.from_file(file, format="wav")
-        sound = sound.set_channels(1)
-        sound.export(file[:-4] + "_mono.wav", format="wav")
+
+    sound = AudioSegment.from_file(file, format="wav")
+    sound = sound.set_channels(1)
+    sound.export(file[:-4] + "_mono.wav", format="wav")
 
 
-def compare_hashes(Hashes: List[str],hashes_to_compare : List[str],indice : int) -> int:
+def compare_hashes(Hashes: List[str],hashes_to_compare : List[str],indice : int, array) -> int:
     """
     Compare the hashes of the music with the hashes of the music in the database.
     :param Hashes: the list of all hashes
@@ -71,14 +73,46 @@ def compare_hashes(Hashes: List[str],hashes_to_compare : List[str],indice : int)
     for hash in Hashes[indice]:
         if hash in hashes_to_compare:
             nb_of_hashes_found = nb_of_hashes_found + 1
-    print("Nombre de matchs avec la musique "+ str(indice+1)+ " :", nb_of_hashes_found)
+    
+    # print("Nombre de matchs avec "+ get_music_name(indice) +  " :", nb_of_hashes_found)
+    # We add the number of matches to the array which is shared between the processes
+    array[indice] = nb_of_hashes_found
     #return nb_of_hashes_found
 
+
+def get_music_name(indice: int) -> str:
+    """
+    Get the name of the music from the database.
+    :param indice: the index of the music in the database.
+    :return: the name of the music.
+    """
+    with open("./dbmusic/musicname.txt", 'r') as f:
+        for i, line in enumerate(f):
+            if i == indice:
+                return line[:-1]
+
+
+def find_music(Matches,threshold = 500) -> List[str]:
+    """
+    Find the music with the most matches.
+    :param arr_matches: the array of the number of matches.
+    :param threshold: the threshold used to find if the music to analyse suit with enough matches or not.
+    :return: the name of the music with the most matches.
+    """
+    max_value = max(Matches)
+
+    if max_value >= threshold:
+        music_name = get_music_name(Matches.index(max_value))
+        print("La musique recherchée est :",music_name)
+    else :
+        print("Aucune musique correspondante dans la database")
+
+#def recognize_music():
 
 if __name__ == "__main__":
     # Variables
     PATH = './music/'
-
+        
     # We count the number of music in the database
     nb_of_music = nb_of_music_in_db()
 
@@ -95,23 +129,18 @@ if __name__ == "__main__":
 
     tic = time()
     process = []
+    array_matches = mp.Array('i', range(nb_of_music))  # Array compatible with multiprocessing for counting the number of matchs
     for i in range(0, nb_of_music):
-        process.append(Process(target= compare_hashes,args=(Hashes,hashes_to_compare,i)))
+        process.append(mp.Process(target= compare_hashes,args=(Hashes,hashes_to_compare,i,array_matches)))
         process[i].start()       
 
     for i in range(0, nb_of_music):
         process[i].join()
     
-    print("Temps d'execution : ", round(time() - tic,2), "s")
-        
-    
-        # We compare the hashes of the music we want to compare with the hashes of the music in the database
-        #nb_of_hashes_found = compare_hashes(Hashes[i],hashes_to_compare)
+    print("Temps d'execution pour l'analyse : ", round(time() - tic,2), "s")
 
-        # We print the result
-        #print("Nombre de matchs : ", nb_of_hashes_found)
-    
-    #print("Comparaison avec la musique " + str(i+1))
-    
-    
-    
+    # PART THREE --> DISPLAY OF THE RESULTS
+    #print(array_matches[:])
+    Matches = array_matches[:]
+    #print(Matches)
+    #find_music(Matches,500)
