@@ -110,3 +110,140 @@ Premier Quartile :  28
 Moyenne des rapports max/len: 0.008902360622741266
 diff :  [9, 9, 21, 8]
 Diff moyenne : 11.75
+
+
+
+####################################################################################################################################""
+
+# Test Music from file - random blablabla
+
+
+####################
+PARTIE : ./music/  #
+####################
+
+Pour une durée de  10  secondes
+Billie Eilish - bad guy_mono.wav
+La musique recherchée est : Billie Eilish - bad guy
+Cheat Codes - How Do You Love_mono.wav
+La musique recherchée est : Cheat Codes - How Do You Love
+Cheat Codes - How Do You Love_mono.wav
+La musique recherchée est : Cheat Codes - How Do You Love
+music_to_compare_mono.wav
+La musique recherchée est : Cheat Codes - How Do You Love
+music_to_compare_mono.wav
+La musique recherchée est : Cheat Codes - How Do You Love
+Billie Eilish - bad guy_mono.wav
+La musique recherchée est : Billie Eilish - bad guy
+music_to_compare_mono.wav
+La musique recherchée est : Billie Eilish - bad guy
+Avicii - Waiting For Love_mono.wav
+La musique recherchée est : Avicii - Waiting For Love
+music_to_compare_mono.wav
+La musique recherchée est : Avicii - Waiting For Love
+Maklemore - Glorious_mono.wav
+La musique recherchée est : Maklemore - Glorious
+Taille échantillons :  [3395, 2821, 4165, 4165, 4165, 3507, 3507, 4851, 4851, 2429]
+Valeurs des maxmatches :  [1155, 785, 2911, 2911, 2911, 3020, 3020, 2258, 2258, 736]
+Valeur des deuxième plus grandes valeurs de matches [52, 39, 60, 60, 60, 40, 40, 47, 47, 25]
+Moyenne des maxs :  2196.5
+Valeur médianne :  2911
+Premier Quartile :  1155
+Moyenne des rapports max/len: 0.5671452178045963
+diff :  [1103, 746, 2851, 2851, 2851, 2980, 2980, 2211, 2211, 711]
+Diff moyenne : 2149.5
+Pour une durée de  15  secondes
+Can't Hold Us - Macklemore & Ryan Lewis (feat. Ray Dalton)_mono.wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Can't Hold Us - Macklemore & Ryan Lewis (feat. Ray Dalton)_mono.wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Can't Hold Us - Macklemore & Ryan Lewis (feat. Ray Dalton)_mono.wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Billie Eilish - bad guy_mono.wav
+La musique recherchée est : Billie Eilish - bad guy
+Pirates of the Caribbean - Soundtrack_mono.wav
+La musique recherchée est : Pirates of the Caribbean - Soundtrack
+music_to_compare_mono.wav
+La musique recherchée est : Pirates of the Caribbean - Soundtrack
+Cheat Codes - How Do You Love_mono.wav
+La musique recherchée est : Cheat Codes - How Do You Love
+Maklemore - Glorious_mono.wav
+La musique recherchée est : Maklemore - Glorious
+Justin Bieber - Unstable ft. The Kid LAROI_mono.wav
+La musique recherchée est : Justin Bieber - Unstable ft
+Billie Eilish - bad guy_mono.wav
+La musique recherchée est : Billie Eilish - bad guy
+Taille échantillons :  [3395, 2821, 4165, 4165, 4165, 3507, 3507, 4851, 4851, 2429, 6097, 6195, 5831, 4515, 6363, 6363, 5985, 6237, 4627, 4207]
+Valeurs des maxmatches :  [1155, 785, 2911, 2911, 2911, 3020, 3020, 2258, 2258, 736, 5929, 2576, 1014, 2260, 1386, 1386, 4066, 533, 252, 6822]
+Valeur des deuxième plus grandes valeurs de matches [52, 39, 60, 60, 60, 40, 40, 47, 47, 25, 56, 46, 67, 65, 46, 46, 51, 56, 56, 55]
+Moyenne des maxs :  2409.45
+Valeur médianne :  2260
+Premier Quartile :  1155
+Moyenne des rapports max/len: 0.5305340549612078
+diff :  [1103, 746, 2851, 2851, 2851, 2980, 2980, 2211, 2211, 711, 5873, 2530, 947, 2195, 1340, 1340, 4015, 477, 196, 6767]     
+Diff moyenne : 2358.75
+
+#########################
+PARTIE : ./wav_not_in/  #
+#########################
+
+Pour une durée de  10  secondes
+Daft Punk - Get Lucky (Official Audio) ft. Pharrell Williams, Nile Rodgers.wav
+La musique recherchée est : Avicii - Waiting For Love
+Calvin Harris, Dua Lipa - One Kiss (Official Video).wav
+La musique recherchée est : The Weeknd - Blinding Lights
+Justin Timberlake - Cry Me A River (Official Video).wav
+Aucune musique correspondante dans la database
+Justin Timberlake - Cry Me A River (Official Video).wav
+Aucune musique correspondante dans la database
+Woodkid - Run Boy Run (Official HD Video).wav
+Aucune musique correspondante dans la database
+Justin Timberlake - Cry Me A River (Official Video).wav
+Aucune musique correspondante dans la database
+Justin Timberlake - Cry Me A River (Official Video).wav
+La musique recherchée est : The Weeknd - Blinding Lights
+Justin Timberlake - Cry Me A River (Official Video).wav
+Aucune musique correspondante dans la database
+Justin Timberlake - Cry Me A River (Official Video).wav
+La musique recherchée est : Avicii - The Nights
+Calvin Harris, Dua Lipa - One Kiss (Official Video).wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Taille échantillons :  [4851, 3787, 3745, 2359, 5509, 1533, 4011, 3493, 4403, 5159]
+Valeurs des maxmatches :  [82, 62, 49, 19, 42, 6, 93, 25, 50, 89]
+Valeur des deuxième plus grandes valeurs de matches [72, 56, 40, 17, 40, 5, 46, 16, 47, 59]
+Moyenne des maxs :  51.7
+Valeur médianne :  50
+Premier Quartile :  25
+Moyenne des rapports max/len: 0.012490239273547418
+diff :  [10, 6, 9, 2, 2, 1, 47, 9, 3, 30]
+Diff moyenne : 11.9
+Pour une durée de  15  secondes
+Calvin Harris, Dua Lipa - One Kiss (Official Video).wav
+La musique recherchée est : Pirates of the Caribbean - Soundtrack
+Marshmello ft. Bastille - Happier (Official Music Video).wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Calvin Harris, Dua Lipa - One Kiss (Official Video).wav
+La musique recherchée est : The Weeknd - Blinding Lights
+Daft Punk - Get Lucky (Official Audio) ft. Pharrell Williams, Nile Rodgers.wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Justin Timberlake - Cry Me A River (Official Video).wav
+La musique recherchée est : Avicii - The Nights
+Calvin Harris, Dua Lipa - One Kiss (Official Video).wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Woodkid - Run Boy Run (Official HD Video).wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Justin Timberlake - Cry Me A River (Official Video).wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Marshmello ft. Bastille - Happier (Official Music Video).wav
+La musique recherchée est : The Weeknd - Blinding Lights
+Daft Punk - Get Lucky (Official Audio) ft. Pharrell Williams, Nile Rodgers.wav
+La musique recherchée est : Avicii - Waiting For Love
+Taille échantillons :  [4851, 3787, 3745, 2359, 5509, 1533, 4011, 3493, 4403, 5159, 6447, 7245, 7735, 7567, 6363, 8029, 8351, 5943, 7651, 7917]
+Valeurs des maxmatches :  [82, 62, 49, 19, 42, 6, 93, 25, 50, 89, 110, 71, 99, 125, 88, 103, 65, 77, 63, 116]
+Valeur des deuxième plus grandes valeurs de matches [72, 56, 40, 17, 40, 5, 46, 16, 47, 59, 86, 67, 96, 103, 70, 85, 65, 58, 50, 110]
+Moyenne des maxs :  71.7
+Valeur médianne :  77
+Premier Quartile :  50
+Moyenne des rapports max/len: 0.012568355891044252
+diff :  [10, 6, 9, 2, 2, 1, 47, 9, 3, 30, 24, 4, 3, 22, 18, 18, 0, 19, 13, 6]
+Diff moyenne : 12.3

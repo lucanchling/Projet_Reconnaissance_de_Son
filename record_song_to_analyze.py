@@ -20,7 +20,7 @@ def record_micro(duree : int):
     
 # record_micro(15)
 
-def random_mono_extract_from_file(duree : int, choix_music : str):
+def random_mono_extract_from_file(duree : int, choix_music : str, path = "./music/"):
     '''
     Extract a random mono music from a file.
     :param duree: the duration of the music to extract in second.
@@ -28,10 +28,11 @@ def random_mono_extract_from_file(duree : int, choix_music : str):
     :return: None
     '''
     nb = 1
-    for i in os.listdir("./music/"):
-        if i.endswith(".wav"):
+    for file in os.listdir(path):
+        if file.endswith(".wav"):
             if nb == int(choix_music):
-                sound = AudioSegment.from_wav("./music/"+i)
+                print(file)
+                sound = AudioSegment.from_wav(path+file)
                 sound = sound.set_channels(1)
                 duree = duree*1000  # une seconde est égale à 1000
                 debut = randint(0,len(sound)-duree)
