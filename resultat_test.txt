@@ -130,21 +130,7 @@ PARTIE : ./music/  #
 Pour une durée de  10  secondes
 Billie Eilish - bad guy_mono.wav
 La musique recherchée est : Billie Eilish - bad guy
-Cheat Codes - How Do You Love_mono.wav
-La musique recherchée est : Cheat Codes - How Do You Love
-Cheat Codes - How Do You Love_mono.wav
-La musique recherchée est : Cheat Codes - How Do You Love
-music_to_compare_mono.wav
-La musique recherchée est : Cheat Codes - How Do You Love
-music_to_compare_mono.wav
-La musique recherchée est : Cheat Codes - How Do You Love
-Billie Eilish - bad guy_mono.wav
-La musique recherchée est : Billie Eilish - bad guy
-music_to_compare_mono.wav
-La musique recherchée est : Billie Eilish - bad guy
 Avicii - Waiting For Love_mono.wav
-La musique recherchée est : Avicii - Waiting For Love
-music_to_compare_mono.wav
 La musique recherchée est : Avicii - Waiting For Love
 Maklemore - Glorious_mono.wav
 La musique recherchée est : Maklemore - Glorious
@@ -158,10 +144,6 @@ Moyenne des rapports max/len: 0.5671452178045963
 diff :  [1103, 746, 2851, 2851, 2851, 2980, 2980, 2211, 2211, 711]
 Diff moyenne : 2149.5
 Pour une durée de  15  secondes
-Can't Hold Us - Macklemore & Ryan Lewis (feat. Ray Dalton)_mono.wav
-La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
-Can't Hold Us - Macklemore & Ryan Lewis (feat. Ray Dalton)_mono.wav
-La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
 Can't Hold Us - Macklemore & Ryan Lewis (feat. Ray Dalton)_mono.wav
 La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
 Billie Eilish - bad guy_mono.wav
@@ -252,3 +234,35 @@ Premier Quartile :  50
 Moyenne des rapports max/len: 0.012568355891044252
 diff :  [10, 6, 9, 2, 2, 1, 47, 9, 3, 30, 24, 4, 3, 22, 18, 18, 0, 19, 13, 6]
 Diff moyenne : 12.3
+
+
+
+###############################################
+# not in
+
+
+Animals.wav
+Aucune musique correspondante dans la database
+Billie jeans.wav
+Aucune musique correspondante dans la database
+One kiss.wav
+Aucune musique correspondante dans la database
+September.wav
+Aucune musique correspondante dans la database
+
+# IN
+
+Avicii - The Nights.wav
+La musique recherchée est : Avicii - The Nights
+Avicii - Waiting For Love.wav
+La musique recherchée est : Avicii - Waiting For Love
+Billie Ellish - bad guy.wav
+La musique recherchée est : Billie Eilish - bad guy
+Can’t hold us - Macklemore _ Ryan Lewis.wav
+La musique recherchée est : Can't Hold Us - Macklemore & Ryan Lewis (feat
+Cheat Codes - How Do You Love.wav
+La musique recherchée est : Cheat Codes - How Do You Love
+Justin Bieber - Unstable ft The Kid LAROI.wav
+Aucune musique correspondante dans la database
+Macklemore- Glorious.wav
+La musique recherchée est : Maklemore - Glorious
