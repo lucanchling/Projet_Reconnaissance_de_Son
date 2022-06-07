@@ -43,7 +43,7 @@ def main():
 
     # Part THREE : Compare the music
     print("-- COMPARE MUSIC WITH DB --")
-    print("Do you want to compare the music with the DB ? (y/n)")
+    print("Do you want to compare the music with the DB ? (y/n) : ")
     if str(input()) == "y":
         cwdb.main(matches_threshold=threshold)
 
