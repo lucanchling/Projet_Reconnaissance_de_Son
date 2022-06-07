@@ -45,12 +45,23 @@ def main():
 def test():
     '''function to run some test to setup the threshold'''
     #main()
-    duree = 10
-    for i in range(10):
+    lenhashes,maxmatches = [],[]
+    duree = 5
+    for i in range(50):
         print("test n°"+str(i+1))
         random_mono_extract_from_file(duree,randint(1,10))
         time.sleep(1)
-        cwdb.main()
+        lh, matches = cwdb.main()
+        lenhashes.append(lh)
+        maxmatches.append(max(matches))
+    print("Taille échantillons : ",lenhashes)
+    print("Valeurs des maxmatches : ",maxmatches)
+    print("Moyenne des maxs : ", sum(maxmatches)/len(maxmatches))
+    sortedmax = sorted(maxmatches)
+    print("Valeur médianne : ", sortedmax[int(len(sortedmax)/2)])
+    print("Premier Quartile : ", sortedmax[int(len(sortedmax)/4)])
+    rapport = [maxmatches[i]/lenhashes[i] for i in range(len(lenhashes))]
+    print("Moyenne des rapports max/len:",sum(rapport)/len(lenhashes))
 
 if __name__ == "__main__":
     #main()

@@ -125,7 +125,7 @@ def main():
     # Generation of hash of the music we want to compare
     hashes_to_compare = generate_fingerprints("./music/music_to_compare_mono.wav",False)
     nb_of_hashes_to_compare = len(hashes_to_compare)
-    print("Nombre de Hash à analyser : ",nb_of_hashes_to_compare)
+    #print("Nombre de Hash à analyser : ",nb_of_hashes_to_compare)
 
     tic = time()
     process = []
@@ -142,8 +142,11 @@ def main():
     # PART THREE --> DISPLAY OF THE RESULTS
     #print(array_matches[:])
     Matches = array_matches[:]
-    print(Matches)
-    find_music(Matches,500)
+    #print(Matches)
+    #find_music(Matches,500)
+    
+    # For test() of shazam.py
+    return nb_of_hashes_to_compare,Matches
 
 # if __name__ == "__main__":
 #     main()
