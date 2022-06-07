@@ -109,7 +109,7 @@ def find_music(Matches,threshold = 500) -> List[str]:
     else :
         print("Aucune musique correspondante dans la database")
 
-def main():
+def main(matches_threshold = 50):
     # Variables
     PATH = './music/'
         
@@ -143,7 +143,7 @@ def main():
     #print(array_matches[:])
     Matches = array_matches[:]
     #print(Matches)
-    find_music(Matches,50)
+    find_music(Matches,matches_threshold)
     
     # For test() of shazam.py
     return nb_of_hashes_to_compare,Matches

@@ -28,12 +28,15 @@ def main():
         duree = int(input("How long do you want to record (in seconds) ? "))
         choice = str(input("Which music do you want to record ? (1,2,3...) : "))
         random_mono_extract_from_file(duree,choice)
+        threshold = 150
     elif answer == 2:
         duree = str(input("How long do you want to record (in seconds) ? "))
         record_micro(duree)
+        threshold = 50
     elif answer == 3:
         print("You must put your file in the folder './music/'")
         print("The file name should be 'music_to_compare.wav'")
+        threshold = 50
     
 
     print()
@@ -42,7 +45,7 @@ def main():
     print("-- COMPARE MUSIC WITH DB --")
     print("Do you want to compare the music with the DB ? (y/n)")
     if str(input()) == "y":
-        cwdb.main()
+        cwdb.main(matches_threshold=threshold)
 
 def test():
     '''function to run some test to setup the threshold'''
@@ -81,5 +84,5 @@ def test():
             print("Diff moyenne :",sum(diffmaxsecond)/len(diffmaxsecond))
 
 if __name__ == "__main__":
-    #main()
-    test()
+    #test()
+    main()
