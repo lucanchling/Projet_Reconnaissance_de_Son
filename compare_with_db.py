@@ -137,13 +137,13 @@ def main():
     for i in range(0, nb_of_music):
         process[i].join()
     
-    print("Temps d'execution pour l'analyse : ", round(time() - tic,2), "s")
+    #print("Temps d'execution pour l'analyse : ", round(time() - tic,2), "s")
 
     # PART THREE --> DISPLAY OF THE RESULTS
     #print(array_matches[:])
     Matches = array_matches[:]
     #print(Matches)
-    #find_music(Matches,500)
+    find_music(Matches,50)
     
     # For test() of shazam.py
     return nb_of_hashes_to_compare,Matches

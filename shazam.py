@@ -4,6 +4,8 @@ import compare_with_db as cwdb
 import generate_hashes as gh
 from record_song_to_analyze import record_micro, random_mono_extract_from_file
 from random import randint
+import os
+from pydub import AudioSegment
 
 def main():
     # Part ONE : Analyse Music from DB
@@ -45,23 +47,30 @@ def main():
 def test():
     '''function to run some test to setup the threshold'''
     #main()
-    lenhashes,maxmatches = [],[]
-    duree = 5
-    for i in range(50):
-        print("test n°"+str(i+1))
-        random_mono_extract_from_file(duree,randint(1,10))
+    lenhashes,maxmatches,secondmaxmatches = [],[],[]
+    for file in os.listdir("./micro_not_in/"):
+        print(file)
+        sound = AudioSegment.from_wav("./micro_not_in/"+file)
+        sound.export('./music/music_to_compare.wav', format='wav')
         time.sleep(1)
         lh, matches = cwdb.main()
+        sortedmatches = sorted(matches)
         lenhashes.append(lh)
         maxmatches.append(max(matches))
+        secondmaxmatches.append(sortedmatches[-2])
+    
     print("Taille échantillons : ",lenhashes)
     print("Valeurs des maxmatches : ",maxmatches)
+    print("Valeur des deuxième plus grandes valeurs de matches",secondmaxmatches)
     print("Moyenne des maxs : ", sum(maxmatches)/len(maxmatches))
     sortedmax = sorted(maxmatches)
     print("Valeur médianne : ", sortedmax[int(len(sortedmax)/2)])
     print("Premier Quartile : ", sortedmax[int(len(sortedmax)/4)])
     rapport = [maxmatches[i]/lenhashes[i] for i in range(len(lenhashes))]
     print("Moyenne des rapports max/len:",sum(rapport)/len(lenhashes))
+    diffmaxsecond = [maxmatches[i]-secondmaxmatches[i] for i in range(len(maxmatches))]
+    print("diff : ",diffmaxsecond)
+    print("Diff moyenne :",sum(diffmaxsecond)/len(diffmaxsecond))
 
 if __name__ == "__main__":
     #main()

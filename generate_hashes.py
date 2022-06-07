@@ -203,7 +203,6 @@ def transfer_wav_to_music():
     Transfer the wav files to the music folder.
     :return: None
     """
-
     Path = "./wav/"
     # Check if ./music/musicname.txt exists --> remove it 
     if os.path.exists("./dbmusic/musicname.txt"):
