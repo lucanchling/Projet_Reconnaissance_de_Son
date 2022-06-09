@@ -62,7 +62,6 @@ def create_mono(full_path_of_file: str) -> None:
         sound = sound.set_channels(1)
         sound.export(full_path_of_file[:-4] + "_mono.wav", format="wav")
 
-
 def compare_hashes(Hashes: List[str],hashes_to_compare : List[str],indice : int, array) -> int:
     """
     Compare the hashes of the music with the hashes of the music in the database.
@@ -81,7 +80,6 @@ def compare_hashes(Hashes: List[str],hashes_to_compare : List[str],indice : int,
     array[indice] = nb_of_hashes_found
     #return nb_of_hashes_found
 
-
 def get_music_name(indice: int) -> str:
     """
     Get the name of the music from the database.
@@ -92,7 +90,6 @@ def get_music_name(indice: int) -> str:
         for i, line in enumerate(f):
             if i == indice:
                 return line[:-1]
-
 
 def find_music(Matches,threshold = 500) -> List[str]:
     """
@@ -148,5 +145,63 @@ def main(matches_threshold = 50):
     # For test() of shazam.py
     return nb_of_hashes_to_compare,Matches
 
-# if __name__ == "__main__":
-#     main()
+
+if __name__ == "__main__":
+# Variables
+    PATH = './music/'
+        
+    # We count the number of music in the database
+    nb_of_music = nb_of_music_in_db()
+
+    # PART ONE --> AQUISITION OF THE HASHES
+    Hashes = retrieve_hashes_from_db(nb_of_music)
+    
+    # Part where we convert list into dictionnary (to use the search through hash's table)
+    #which_music = 2
+    #hash_table = {i : 1 for i in Hashes[which_music]}   # Create the hash table from the music that have been selected
+    hash_table = []
+    #tic = time()
+    for i in range(nb_of_music):
+        hash_table.append({j : 1 for j in Hashes[i]})
+    #print("Temps d'execution : ",round(time()-tic,2)," secondes")
+    
+    # PART TWO --> COMPARISON OF THE HASHES
+    create_mono(PATH + "music_to_compare.wav")
+    
+    # Generation of hash of the music we want to compare
+    hashes_to_compare = generate_fingerprints("./music/music_to_compare_mono.wav",False)
+    nb_of_hashes_to_compare = len(hashes_to_compare)
+    # #print("Nombre de Hash à analyser : ",nb_of_hashes_to_compare)
+
+    Matches = []
+    for i in range(nb_of_music):
+        nb_matches = 0
+        for hash in hashes_to_compare :
+            if hash in hash_table[i].keys():
+                nb_matches+=1
+        Matches.append(nb_matches)
+    print(Matches)
+    #print("Le nombre de hash est de : ",nb_matches) 
+
+
+    # tic = time()
+    # process = []
+    # array_matches = mp.Array('i', range(nb_of_music))  # Array compatible with multiprocessing for counting the number of matchs
+    # for i in range(0, nb_of_music):
+    #     process.append(mp.Process(target= compare_hashes,args=(Hashes,hashes_to_compare,i,array_matches)))
+    #     process[i].start()       
+
+    # for i in range(0, nb_of_music):
+    #     process[i].join()
+    
+    # #print("Temps d'execution pour l'analyse : ", round(time() - tic,2), "s")
+
+    # # PART THREE --> DISPLAY OF THE RESULTS
+    # #print(array_matches[:])
+    # Matches = array_matches[:]
+    # #print(Matches)
+    # find_music(Matches,matches_threshold)
+    
+    # # For test() of shazam.py
+    # return nb_of_hashes_to_compare,Matches
+   
