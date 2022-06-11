@@ -152,6 +152,9 @@ if __name__ == "__main__":
         
     # We count the number of music in the database
     nb_of_music = nb_of_music_in_db()
+    # with open('./First Test/test_time_of_execution.txt', 'a') as f:
+    #     f.write("Pour "+str(nb_of_music)+ " musiques :\n")
+    
 
     # PART ONE --> AQUISITION OF THE HASHES
     Hashes = retrieve_hashes_from_db(nb_of_music)
@@ -172,15 +175,21 @@ if __name__ == "__main__":
     hashes_to_compare = generate_fingerprints("./music/music_to_compare_mono.wav",False)
     nb_of_hashes_to_compare = len(hashes_to_compare)
     # #print("Nombre de Hash à analyser : ",nb_of_hashes_to_compare)
-
-    Matches = []
-    for i in range(nb_of_music):
-        nb_matches = 0
-        for hash in hashes_to_compare :
-            if hash in hash_table[i].keys():
-                nb_matches+=1
-        Matches.append(nb_matches)
-    print(Matches)
+    for N in [1000,2000,5000]:
+        tic = time()
+        for i in range(N):
+            Matches = []
+            for i in range(nb_of_music):
+                nb_matches = 0
+                for hash in hashes_to_compare :
+                    if hash in hash_table[i].keys():
+                        nb_matches+=1
+                Matches.append(nb_matches)
+        with open('./First Test/test_time_of_execution.txt', 'a') as f:
+            f.write("Pour N = " +str(N)+" Temps d'execution moyen : "+str((time()-tic)/N)+"\n")
+        # print("Pour N = ",N," Temps d'exécution moyen : ",(time()-tic)/N)
+    #print(round(time()-tic,4))
+    #print(Matches)
     #print("Le nombre de hash est de : ",nb_matches) 
 
 
