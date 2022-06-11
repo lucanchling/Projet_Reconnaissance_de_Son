@@ -91,7 +91,7 @@ def get_music_name(indice: int) -> str:
             if i == indice:
                 return line[:-1]
 
-def find_music(Matches,threshold = 500) -> List[str]:
+def find_music(Matches,threshold = 100) -> List[str]:
     """
     Find the music with the most matches.
     :param arr_matches: the array of the number of matches.
@@ -105,6 +105,28 @@ def find_music(Matches,threshold = 500) -> List[str]:
         print("La musique recherchée est :",music_name)
     else :
         print("Aucune musique correspondante dans la database")
+
+def generate_hash_table(nb_of_music):
+    
+    hash_table = []
+    for i in range(1, nb_of_music+1):
+        # We read the hashes of the music
+        hashes = read_hash_txt("./dbmusic/datamusic"+ str(i)+ ".txt")   # Getting data from the .txt
+        hash_table.append({j : 1 for j in hashes})  # Conversion to a dictionary
+
+    return hash_table
+
+def get_matches(nb_of_music,hash_table,hashes_to_compare):
+    # Comparaison with all the music in the db
+    Matches = []
+    for i in range(nb_of_music):
+        nb_matches = 0
+        for hash in hashes_to_compare :
+            if hash in hash_table[i].keys():
+                nb_matches+=1
+        Matches.append(nb_matches)
+    
+    return Matches
 
 def main(matches_threshold = 50):
     # Variables
@@ -152,65 +174,21 @@ if __name__ == "__main__":
         
     # We count the number of music in the database
     nb_of_music = nb_of_music_in_db()
-    # with open('./First Test/test_time_of_execution.txt', 'a') as f:
-    #     f.write("Pour "+str(nb_of_music)+ " musiques :\n")
     
-
-    # PART ONE --> AQUISITION OF THE HASHES
-    Hashes = retrieve_hashes_from_db(nb_of_music)
+    # PART ONE --> CREATION OF THE HASH TABLE
+    hash_table = generate_hash_table(nb_of_music)
     
-    # Part where we convert list into dictionnary (to use the search through hash's table)
-    #which_music = 2
-    #hash_table = {i : 1 for i in Hashes[which_music]}   # Create the hash table from the music that have been selected
-    hash_table = []
-    #tic = time()
-    for i in range(nb_of_music):
-        hash_table.append({j : 1 for j in Hashes[i]})
-    #print("Temps d'execution : ",round(time()-tic,2)," secondes")
     
     # PART TWO --> COMPARISON OF THE HASHES
     create_mono(PATH + "music_to_compare.wav")
     
     # Generation of hash of the music we want to compare
     hashes_to_compare = generate_fingerprints("./music/music_to_compare_mono.wav",False)
-    nb_of_hashes_to_compare = len(hashes_to_compare)
-    # #print("Nombre de Hash à analyser : ",nb_of_hashes_to_compare)
-    for N in [1000,2000,5000]:
-        tic = time()
-        for i in range(N):
-            Matches = []
-            for i in range(nb_of_music):
-                nb_matches = 0
-                for hash in hashes_to_compare :
-                    if hash in hash_table[i].keys():
-                        nb_matches+=1
-                Matches.append(nb_matches)
-        with open('./First Test/test_time_of_execution.txt', 'a') as f:
-            f.write("Pour N = " +str(N)+" Temps d'execution moyen : "+str((time()-tic)/N)+"\n")
-        # print("Pour N = ",N," Temps d'exécution moyen : ",(time()-tic)/N)
-    #print(round(time()-tic,4))
-    #print(Matches)
-    #print("Le nombre de hash est de : ",nb_matches) 
-
-
-    # tic = time()
-    # process = []
-    # array_matches = mp.Array('i', range(nb_of_music))  # Array compatible with multiprocessing for counting the number of matchs
-    # for i in range(0, nb_of_music):
-    #     process.append(mp.Process(target= compare_hashes,args=(Hashes,hashes_to_compare,i,array_matches)))
-    #     process[i].start()       
-
-    # for i in range(0, nb_of_music):
-    #     process[i].join()
     
-    # #print("Temps d'execution pour l'analyse : ", round(time() - tic,2), "s")
-
-    # # PART THREE --> DISPLAY OF THE RESULTS
-    # #print(array_matches[:])
-    # Matches = array_matches[:]
-    # #print(Matches)
-    # find_music(Matches,matches_threshold)
+    # Finding the matches 
+    Matches = get_matches(nb_of_music,hash_table,hashes_to_compare)
     
-    # # For test() of shazam.py
-    # return nb_of_hashes_to_compare,Matches
+    # PART THREE --> DISPLAY OF THE RESULTS
+    print(Matches)
+    find_music(Matches)
    
